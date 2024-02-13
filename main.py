@@ -2,24 +2,39 @@ import random
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
-def game():
-    keep_playing = False
-    while not keep_playing:
-        player_hand = random.sample(cards,2)
-        dealer_hand = random.sample(cards,2)
-        print(f"Player: {player_hand} {player_hand[0] + player_hand[1]}")
-        print(f"Dealer: {dealer_hand} {dealer_hand[0] + dealer_hand[1]}")
+def deal_card():
+    return random.choice(cards)
 
-        player_first_hand = sum(player_hand)
-        dealer_first_hand = sum(dealer_hand)
+def game():
+    player_first_draw = random.sample(cards,2)
+    dealer_first_draw = random.sample(cards,2)
     
-        if player_first_hand == 21 and dealer_first_hand == 21:
+    print(f"Player: {player_first_draw} {sum(player_first_draw)}")
+    print(f"Dealer: {dealer_first_draw} {sum(dealer_first_draw)}")
+
+    player_score = sum(player_first_draw)
+    dealer_score = sum(dealer_first_draw)
+        
+    game_over = False
+    while not game_over:
+        
+        player_score = sum(player_first_draw)
+        dealer_score = sum(dealer_first_draw)
+    
+        if player_score == 21 and dealer_score == 21:
             print("Draw")
-            keep_playing = True
-        elif player_first_hand == 21:
-            print(f"Player won with {player_first_hand}")
-            keep_playing = True
-        elif dealer_first_hand == 21:
-            print(f"Dealer won with {dealer_first_hand}")
-            keep_playing = True        
+            game_over = True
+        elif player_score == 21:
+            print(f"Player won with {player_score}")
+            game_over = True
+        elif  dealer_score == 21:
+            print(f"You lose, dealer won with {dealer_score}")
+        elif player_score > 21:
+            print("You have over 21")
+            game_over = True
+        else: 
+            if input("Draw another card") == "y":
+                player_first_draw.append(deal_card())
+                print(f"Player: {player_first_draw} {sum(player_first_draw)}")
+                
 game()

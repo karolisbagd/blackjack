@@ -29,12 +29,31 @@ def game():
             game_over = True
         elif  dealer_score == 21:
             print(f"You lose, dealer won with {dealer_score}")
+            game_over = True
         elif player_score > 21:
             print("You have over 21")
             game_over = True
         else: 
-            if input("Draw another card") == "y":
+            question = input("Draw another card")
+            if question == "y":
                 player_first_draw.append(deal_card())
                 print(f"Player: {player_first_draw} {sum(player_first_draw)}")
-                
+            elif question == "n":
+                while dealer_score < 17:
+                    dealer_first_draw.append(deal_card())
+                    dealer_score = sum(dealer_first_draw)
+                    print(f"Dealer: {dealer_first_draw} {sum(dealer_first_draw)}")
+                    if dealer_score > 21: 
+                        print(f"Dealer have over 21 with {dealer_score}, Player wins.")
+                        game_over = True
+                    
+            if dealer_score > player_score:
+                 print(f"Dealer wins with: {dealer_first_draw} {sum(dealer_first_draw)}\n while player {player_first_draw} {sum(player_first_draw)}")
+                 game_over = True
+            elif dealer_score == player_score:
+                print("Draw")
+                game_over = True
+            else:
+                 print(f"Player wins with: {player_first_draw} {sum(player_first_draw)}\n while dealer {dealer_first_draw} {sum(dealer_first_draw)}")
+                 game_over = True
 game()

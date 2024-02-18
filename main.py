@@ -17,6 +17,28 @@ def calculate_score(cards):
         cards.append(1)
     return sum(cards)
 
+def compare(p_score, d_score):
+    if p_score == d_score:
+        return "Draw"
+    elif d_score == 0:
+        return "Lose, opponent has Blackjack"
+    elif p_score == 0:
+        return "Win with a Blackjack"
+    elif p_score > 21:
+        return "You went over 21. You lose"
+    elif d_score > 21:
+        return "Dealer, went over 21. You win"
+    elif p_score > d_score:
+        return "You win"
+    else:
+        return "You lose"
+    
+#     print(f"Player won with {calculate_score(players_cards)}")
+    # elif 
+    #     print(f"You lose, dealer won with {calculate_score(dealers_cards)}")
+    # elif calculate_score(players_cards) > 21:
+    #     print("You have over 21")
+
 players_cards = []
 dealers_cards = []
 game_over = False
@@ -39,15 +61,17 @@ while not game_over:
         if extra_card == 'y':
             players_cards.append(deal_card())
         else:
-            game_over == True
+            game_over = True
     
 while dealers_score !=0 and dealers_score < 17:
     dealers_cards.append(deal_card())
-    computer_score = calculate_score(dealers_score)
+    dealers_score = calculate_score(dealers_score)
+
+print(f"Player cards: {players_cards}, score: {player_score}")
+print(f"Dealer's cards: {dealers_cards}, score: {dealers_score}")
+print(compare(player_score, dealers_score))
 
 
-# print(f"Player cards: {players_cards}, score: {player_score}")
-# print(f"Dealer's cards: {dealers_cards}, score: {dealers_score}")
 
 
 # if calculate_score(players_cards) == 21 and calculate_score(dealers_cards) == 21:

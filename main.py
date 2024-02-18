@@ -6,11 +6,8 @@ def deal_card():
     card = random.choice(cards)
     return card
 
-players_cards = []
-dealers_cards = []
-
-
 def calculate_score(cards):
+    """Takes a list of cards and return the score calculated from the cards"""
     if sum(cards) == 21 and len(cards) == 21:
      # Returns 0 if player/dealer has got blackjack score 21
      return 0
@@ -18,21 +15,38 @@ def calculate_score(cards):
     if 11 in cards and sum(cards) > 21:
         cards.remove(11)
         cards.append(1)
-    
     return sum(cards)
-    
-# player_score = sum(player_first_draw)
-# dealer_score = sum(dealer_first_draw)
 
-# print(f"Player: {player_first_draw} {sum(player_first_draw)}")
-# print(f"Dealer: {dealer_first_draw} {sum(dealer_first_draw)}")
-
-
+players_cards = []
+dealers_cards = []
+game_over = False
 
 for _ in range(2):
-    players_cards.append(deal_card)
-    dealers_cards.append(deal_card)
+    players_cards.append(deal_card())
+    dealers_cards.append(deal_card())
     
+while not game_over:
+
+    player_score = calculate_score(players_cards)
+    dealers_score = calculate_score(dealers_cards)
+    print(f"Player's cards:{players_cards}, current score: {player_score} ")
+    print(f"Dealer's first card: {dealers_cards[0]}")
+
+    if player_score == 0 or dealers_score == 0 or player_score > 21:
+        game_over = True
+    else:
+        extra_card = input("Type 'y' to get another card, type 'n' to pass:")
+        if extra_card == 'y':
+            players_cards.append(deal_card())
+        else:
+            game_over == True
+    
+    
+
+
+# print(f"Player cards: {players_cards}, score: {player_score}")
+# print(f"Dealer's cards: {dealers_cards}, score: {dealers_score}")
+
 
 # if calculate_score(players_cards) == 21 and calculate_score(dealers_cards) == 21:
 #     print("Draw")

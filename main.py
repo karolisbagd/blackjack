@@ -41,7 +41,9 @@ while not game_over:
         else:
             game_over == True
     
-    
+while dealers_score !=0 and dealers_score < 17:
+    dealers_cards.append(deal_card())
+    computer_score = calculate_score(dealers_score)
 
 
 # print(f"Player cards: {players_cards}, score: {player_score}")

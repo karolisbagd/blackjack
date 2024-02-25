@@ -38,14 +38,6 @@ def compare(p_score, d_score):
     else:
         return "You lose"
     
-#     print(f"Player won with {calculate_score(players_cards)}")
-    # elif 
-    #     print(f"You lose, dealer won with {calculate_score(dealers_cards)}")
-    # elif calculate_score(players_cards) > 21:
-    #     print("You have over 21")
-  
- 
-    
 def play_game():
     
     print(logo) 
